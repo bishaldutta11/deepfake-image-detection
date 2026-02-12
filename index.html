@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Good: Building Defenses Against Deepfake Misinformation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>AI Defense</span>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#detector"><i class="fas fa-search"></i> Detector</a></li>
+                <li><a href="#process"><i class="fas fa-cogs"></i> How It Works</a></li>
+                <li><a href="#stats"><i class="fas fa-chart-bar"></i> Statistics</a></li>
+                <li><a href="#learn"><i class="fas fa-book"></i> Learn</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>AI for Good: Building Defenses Against Deepfake Misinformation</h1>
+            <p>Protecting truth in the digital age with advanced AI detection technology that helps identify manipulated media and prevent the spread of misinformation.</p>
+            <button class="cta-button" onclick="document.getElementById('detector').scrollIntoView({behavior: 'smooth'})">
+                <i class="fas fa-play-circle"></i> Try Deepfake Detector
+            </button>
+        </div>
+    </section>
+
+    <section id="detector">
+        <div class="container">
+            <h2>Deepfake Detection Tool</h2>
+            <p class="section-subtitle">Upload an image to analyze for potential deepfake manipulation using our advanced AI technology</p>
+            
+            <div class="detector-area">
+                <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+                    <input type="file" id="fileInput" accept="image/*">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Upload Image File</h3>
+                    <p>Click to browse or drag and drop your file here</p>
+                    <p class="file-types">Supported formats: JPG, PNG, BMP, TIFF</p>
+                    
+                    <div class="file-info hidden" id="fileInfo">
+                        <h4>Selected File</h4>
+                        <p id="fileName"></p>
+                        <p id="fileSize"></p>
+                    </div>
+                </div>
+
+                <div class="results-panel">
+                    <h3>Analysis Results</h3>
+                    <div id="resultsContent">
+                        <div class="placeholder">
+                            <i class="fas fa-search" style="font-size: 3rem; color: #b0b0b0; margin-bottom: 1rem;"></i>
+                            <p style="text-align: center; color: #666;">
+                                Upload an image to see detection results
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process">
+        <div class="container">
+            <h2>How Our Detection Works</h2>
+            <p class="section-subtitle">Our advanced AI analyzes multiple aspects of images to identify potential manipulations</p>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>Upload Image</h4>
+                    <p>Upload an image file for analysis. Our system supports multiple formats.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>AI Analysis</h4>
+                    <p>Our neural networks examine facial features, lighting, textures, and patterns.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>Pattern Detection</h4>
+                    <p>The system identifies inconsistencies and artifacts that indicate manipulation.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4>Results & Insights</h4>
+                    <p>Receive a detailed report with confidence score and identified manipulation indicators.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats">
+        <div class="container">
+            <h2>Global Deepfake Statistics</h2>
+            <p class="section-subtitle">Understanding the scale and impact of deepfake technology worldwide</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-number">900%</div>
+                    <div class="stat-desc">Increase in deepfakes since 2020</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-number">96%</div>
+                    <div class="stat-desc">Of deepfakes are malicious</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="stat-number">$250M</div>
+                    <div class="stat-desc">Annual fraud losses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-number">500K+</div>
+                    <div class="stat-desc">Deepfakes detected daily</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="trendChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section id="learn">
+        <div class="container">
+            <h2>Understanding Deepfakes</h2>
+            <p class="section-subtitle">Learn about deepfake technology, its risks, and how to protect yourself</p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>What Are Deepfakes?</h3>
+                    <p>Deepfakes are synthetic media created using artificial intelligence to manipulate or generate visual and audio content with a high potential to deceive. They use deep learning algorithms to swap faces, mimic voices, or create entirely fabricated scenarios.</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3>How Do We Detect Them?</h3>
+                    <p>Our AI system analyzes multiple factors: facial inconsistencies, unnatural lighting, texture patterns, and biological signals. We use convolutional neural networks trained on millions of real and fake image samples.</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Why It Matters</h3>
+                    <p>Deepfakes pose serious threats to democracy, privacy, and security. They can spread misinformation, damage reputations, facilitate fraud, and undermine trust in media. Early detection is crucial for protecting individuals and society.</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Spotting Signs</h3>
+                    <p>Look for: unnatural facial features, inconsistent lighting, blurry boundaries around faces, unusual skin texture, and artifacts in reflections. High-quality deepfakes are harder to detect, requiring AI assistance.</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Our Technology</h3>
+                    <p>We employ ensemble learning combining multiple neural networks: facial landmark detection, texture analysis, and adversarial training. Our models are continuously updated with the latest deepfake techniques.</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Take Action</h3>
+                    <p>Stay vigilant: verify sources, check multiple outlets, look for official verification, be skeptical of sensational content, and report suspicious media. Educate others about deepfakes and support digital literacy initiatives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>AI Defense</h3>
+                    <p>Building trustworthy AI solutions to combat misinformation and protect digital integrity.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#detector"><i class="fas fa-chevron-right"></i> Detector</a></li>
+                        <li><a href="#process"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+                        <li><a href="#stats"><i class="fas fa-chevron-right"></i> Statistics</a></li>
+                        <li><a href="#learn"><i class="fas fa-chevron-right"></i> Learn</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> API Access</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Research Papers</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Case Studies</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@deepfakedefense.org</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +91 9064078945</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> kolkata, CA</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 AI for Good Initiative | Building a Safer Digital Future</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
