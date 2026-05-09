@@ -121,6 +121,11 @@ def serve_js():
     """Serve JavaScript file"""
     return send_from_directory('.', 'app.js')
 
+@app.route('/assets/<path:path>')
+def serve_assets(path):
+    """Serve assets directory"""
+    return send_from_directory('assets', path)
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
