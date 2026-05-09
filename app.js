@@ -97,17 +97,28 @@ function displayFileInfo(file) {
     const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
     fileSize.textContent = `${sizeInMB} MB`;
     
-    fileInfo.classList.remove('hidden');
+    // Show thumbnail
+    const fileThumbnail = document.getElementById('fileThumbnail');
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        fileThumbnail.src = e.target.result;
+        fileThumbnail.parentElement.parentElement.classList.remove('hidden'); // Show polaroid frame
+    }
+    reader.readAsDataURL(file);
+    
+    // Hide empty state
+    document.querySelector('.pin-empty-state').style.display = 'none';
 }
 
 async function analyzeFile(file) {
-    // Show analyzing state
+    // Show analyzing state in a sticky note
     resultsContent.innerHTML = `
-        <div class="analyzing">
-            <div class="spinner"></div>
-            <div class="analyzing-text">Analyzing ${file.name}...</div>
-            <p style="color: #666; text-align: center;">
-                Our AI is examining facial features, lighting patterns, and other indicators of manipulation
+        <div class="sticky-note">
+            <div class="pushpin blue-pin"></div>
+            <h3 class="handwritten" style="text-align: center; margin-bottom: 1rem;">Analyzing Evidence...</h3>
+            <div class="spinner" style="margin: 0 auto;"></div>
+            <p class="handwritten-small" style="text-align: center; margin-top: 1rem;">
+                Looking for forensic traces...
             </p>
         </div>
     `;
@@ -139,49 +150,35 @@ function displayResults(data, filename) {
     const isReal = data.prediction === 'authentic';
     const confidence = data.confidence;
     
+    // Show string connecting photo to notes
+    const stringSvg = document.querySelector('.connecting-string');
+    if(stringSvg) stringSvg.classList.remove('hidden');
+
     resultsContent.innerHTML = `
-        <div class="result-card">
-            <div class="result-header">
-                <div class="result-icon ${isReal ? 'authentic' : 'deepfake'}">
-                    <i class="fas ${isReal ? 'fa-check-circle' : 'fa-exclamation-triangle'}"></i>
-                </div>
-                <div>
-                    <div class="result-title ${isReal ? 'authentic' : 'deepfake'}">
-                        ${isReal ? '✓ Likely Authentic' : '⚠ Potential Deepfake Detected'}
-                    </div>
-                    <p>Analysis completed for: ${filename}</p>
-                    ${data.model_used === 'mock' ? '<p style="color: var(--warning); font-size: 0.9rem;"><i class="fas fa-info-circle"></i> Using demonstration mode</p>' : ''}
-                </div>
-            </div>
-            
-            <div class="confidence-meter">
-                <div class="confidence-label">
-                    <span>Confidence Level</span>
-                    <span>${confidence}%</span>
-                </div>
-                <div class="confidence-bar">
-                    <div class="confidence-fill ${isReal ? '' : 'deepfake'}" 
-                         style="width: ${confidence}%;">
-                        ${confidence}%
+        <div class="sticky-note">
+            <div class="pushpin red-pin"></div>
+            <div class="result-card">
+                <div class="result-header">
+                    <div>
+                        <div class="result-title ${isReal ? 'authentic' : 'deepfake'}">
+                            ${isReal ? 'Verdict: Authentic' : 'Verdict: Deepfake'}
+                        </div>
+                        <p class="handwritten-small">Confidence: ${confidence}%</p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="indicators">
-                <h4>Key Indicators:</h4>
-                <ul class="indicators-list">
-                    ${data.indicators.map((ind, index) => `
-                        <li class="${isReal ? '' : (index < 3 ? 'deepfake' : '')}">
-                            <i class="fas ${isReal ? 'fa-check' : (index < 3 ? 'fa-times' : 'fa-exclamation')}"></i>
-                            ${ind}
-                        </li>
-                    `).join('')}
-                </ul>
-            </div>
-            
-            <div class="disclaimer">
-                <strong>Note:</strong> This analysis is based on AI detection and should be verified through 
-                multiple sources for critical applications. Model accuracy: 94.2%.
+                
+                <div class="indicators" style="margin-top: 1rem;">
+                    <h4>Forensic Notes:</h4>
+                    <ul class="indicators-list" style="list-style: none; padding: 0;">
+                        ${data.indicators.map((ind, index) => `
+                            <li>- ${ind}</li>
+                        `).join('')}
+                    </ul>
+                </div>
+                
+                <div class="disclaimer">
+                    Examine carefully. AI accuracy ~94.2%.
+                </div>
             </div>
         </div>
     `;

@@ -46,40 +46,54 @@
 
     <section id="detector">
         <div class="container">
-            <h2>Deepfake Detection Tool</h2>
-            <p class="section-subtitle">Upload an image to analyze for potential deepfake manipulation using our advanced AI technology</p>
+            <h2>The Detective's Evidence Board</h2>
+            <p class="section-subtitle">Pin a suspect image to the board to initiate the AI investigation.</p>
             
-            <div class="detector-wrapper">
+            <div class="evidence-board-wrapper">
+                <div class="board-texture"></div>
+                
                 <div class="detector-image-container">
-                    <img src="assets/images/detective_avatar.png" alt="3D Detective Avatar" class="avatar-image" style="max-width: 280px;">
+                    <img src="assets/images/detective_avatar.png" alt="3D Detective Avatar" class="avatar-image">
                 </div>
                 
-                <div class="detector-area">
-                    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
-                        <input type="file" id="fileInput" accept="image/*">
-                        <div class="upload-icon">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                        </div>
-                        <h3>Upload Image File</h3>
-                        <p>Click to browse or drag and drop your file here</p>
-                        <p class="file-types">Supported formats: JPG, PNG, BMP, TIFF</p>
+                <div class="evidence-area">
+                    <!-- Upload Zone (The Polarid drop zone) -->
+                    <div class="pin-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()" style="display: flex; align-items: center; justify-content: center; width: 100%;">
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
                         
-                        <div class="file-info hidden" id="fileInfo">
-                            <h4>Selected File</h4>
-                            <p id="fileName"></p>
-                            <p id="fileSize"></p>
+                        <!-- Empty State -->
+                        <div class="pin-empty-state" style="width: 80%; max-width: 300px; padding: 3rem; text-align: center;">
+                            <i class="fas fa-thumbtack pushpin-icon"></i>
+                            <h3>Pin Image Here</h3>
+                            <p>Drag & Drop or Click</p>
+                            <div class="tape top-tape"></div>
+                        </div>
+
+                        <!-- Filled State (Polaroid) -->
+                        <div class="polaroid-frame hidden" id="fileInfo">
+                            <div class="pushpin red-pin"></div>
+                            <div class="polaroid-photo">
+                                <img id="fileThumbnail" src="" alt="Thumbnail">
+                                <div class="scanning-line hidden" id="laserScanner"></div>
+                            </div>
+                            <div class="polaroid-caption">
+                                <p id="fileName" class="handwritten"></p>
+                                <p id="fileSize" class="handwritten-small"></p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="results-panel">
-                        <h3>Analysis Results</h3>
-                        <div id="resultsContent">
-                            <div class="placeholder" style="text-align: center; padding: 2rem 0;">
-                                <i class="fas fa-magic" style="font-size: 3rem; color: #E9ECEF; margin-bottom: 1rem;"></i>
-                                <p style="color: #8A92A6; font-size: 1.1rem;">
-                                    Upload an image to see the magic happen!
-                                </p>
-                            </div>
+                    <!-- Results Panel (Sticky Notes) -->
+                    <div class="results-board" id="resultsContent">
+                        <!-- Connecting String -->
+                        <svg class="connecting-string hidden" width="100%" height="100%" style="position: absolute; top:0; left:0; pointer-events:none; z-index:0;">
+                            <path id="stringPath" d="M -50 150 Q 100 200 250 100" stroke="#FF4B91" stroke-width="3" fill="none" stroke-dasharray="5,5" />
+                        </svg>
+
+                        <div class="placeholder-note">
+                            <div class="pushpin blue-pin"></div>
+                            <p class="handwritten">Waiting for evidence...</p>
+                            <img src="assets/images/shield_avatar.png" alt="Shield Avatar" class="avatar-image-small" style="max-width: 80px; margin-top: 10px;">
                         </div>
                     </div>
                 </div>
@@ -91,34 +105,41 @@
         <h2>How Our Detection Works</h2>
         <p class="section-subtitle">Our advanced AI analyzes multiple aspects of images to identify potential manipulations</p>
         
-        <div class="process-steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div>
-                    <h4>Upload Image</h4>
-                    <p>Upload an image file for analysis. Our system supports multiple formats.</p>
+        <div class="process-wrapper" style="display: flex; align-items: center; gap: 4rem;">
+            <div class="process-content" style="flex: 1;">
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h4>Upload Image</h4>
+                            <p>Upload an image file for analysis. Our system supports multiple formats.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h4>AI Analysis</h4>
+                            <p>Our neural networks examine facial features, lighting, textures, and patterns.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h4>Pattern Detection</h4>
+                            <p>The system identifies inconsistencies and artifacts that indicate manipulation.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div>
+                            <h4>Get Results</h4>
+                            <p>Receive a detailed report with confidence score and identified manipulation indicators.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <div>
-                    <h4>AI Analysis</h4>
-                    <p>Our neural networks examine facial features, lighting, textures, and patterns.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <div>
-                    <h4>Pattern Detection</h4>
-                    <p>The system identifies inconsistencies and artifacts that indicate manipulation.</p>
-                </div>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <div>
-                    <h4>Get Results</h4>
-                    <p>Receive a detailed report with confidence score and identified manipulation indicators.</p>
-                </div>
+            <div class="process-image-container" style="flex: 1; text-align: center;">
+                <img src="assets/images/learn_avatar.png" alt="3D Learn Avatar" class="avatar-image" style="max-width: 100%; animation: float 6s ease-in-out infinite;">
             </div>
         </div>
     </section>
@@ -128,8 +149,8 @@
             <h2>Global Statistics</h2>
             <p class="section-subtitle">Understanding the scale and impact of deepfake technology worldwide</p>
             
-            <div class="stats-wrapper">
-                <div class="stats-content">
+            <div class="stats-wrapper" style="display: flex; align-items: center; gap: 4rem; flex-direction: row-reverse;">
+                <div class="stats-content" style="flex: 1;">
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-icon">
@@ -161,13 +182,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="stats-image-container">
-                    <img src="assets/images/data_avatar.png" alt="3D Data Avatar" class="avatar-image" style="max-width: 350px;">
+                <div class="stats-image-container" style="flex: 1; text-align: center;">
+                    <img src="assets/images/data_avatar.png" alt="3D Data Avatar" class="avatar-image" style="max-width: 100%; animation: float-alt 8s ease-in-out infinite;">
                 </div>
             </div>
 
-            <div class="chart-container">
-                <canvas id="trendChart"></canvas>
+            <div class="chart-wrapper" style="display: flex; align-items: center; gap: 4rem; margin-top: 4rem;">
+                <div class="chart-container" style="flex: 2; margin-top: 0; max-width: 700px; width: 100%;">
+                    <canvas id="trendChart"></canvas>
+                </div>
+                <div class="chart-avatar-container" style="flex: 1; text-align: center;">
+                    <img src="assets/images/shield_avatar.png" alt="3D Shield Avatar" class="avatar-image">
+                </div>
             </div>
         </div>
     </section>

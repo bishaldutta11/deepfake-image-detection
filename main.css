@@ -929,8 +929,227 @@ footer {
     100% { opacity: 0.6; }
 }
 
+/* DETECTIVE EVIDENCE BOARD REDESIGN */
+.evidence-board-wrapper {
+    display: flex;
+    align-items: stretch;
+    background: #E8E2D2; /* Light corkboard/paper color */
+    padding: 3rem;
+    padding-left: 14rem; /* Space for the overlapping avatar */
+    border-radius: var(--radius-lg);
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.1), 0 20px 40px rgba(0,0,0,0.1);
+    position: relative;
+    margin-top: 4rem;
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.05"/></svg>');
+}
+
+.evidence-area {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    z-index: 1;
+    position: relative;
+}
+
+.detector-image-container {
+    position: absolute;
+    bottom: -20px;
+    left: -80px;
+    width: 350px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.avatar-image {
+    max-width: 100%;
+    max-height: 550px;
+    object-fit: contain;
+    animation: float-alt 7s ease-in-out infinite;
+}
+
+/* Upload Zone -> Pin Zone */
+.pin-zone {
+    position: relative;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.pin-zone input {
+    display: none;
+}
+
+.pin-empty-state {
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px dashed rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.pin-empty-state:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: rotate(-2deg) scale(1.02);
+}
+
+.pushpin-icon {
+    font-size: 3rem;
+    color: #FF4B91;
+    margin-bottom: 1rem;
+    transform: rotate(45deg);
+}
+
+.pin-empty-state h3 { color: #333; font-family: 'Courier New', Courier, monospace; font-weight: bold; }
+.pin-empty-state p { color: #666; font-family: 'Courier New', Courier, monospace; }
+
+/* The Tape */
+.tape {
+    position: absolute;
+    background-color: rgba(255, 255, 200, 0.4);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    backdrop-filter: blur(2px);
+}
+.top-tape {
+    width: 120px;
+    height: 30px;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+}
+
+/* Polaroid Frame */
+.polaroid-frame {
+    background: white;
+    padding: 15px 15px 50px 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    transform: rotate(3deg);
+    transition: transform 0.3s ease;
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.polaroid-frame:hover {
+    transform: rotate(0deg) scale(1.05);
+    z-index: 10;
+}
+
+.polaroid-photo {
+    position: relative;
+    background: #e8e8e8;
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#fileThumbnail {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.polaroid-caption {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    width: calc(100% - 30px);
+    text-align: center;
+}
+
+/* Pushpins */
+.pushpin {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: inset -3px -3px 5px rgba(0,0,0,0.3), 0 5px 5px rgba(0,0,0,0.3);
+    z-index: 5;
+}
+.pushpin::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 15px;
+    background: #ccc;
+    bottom: -10px;
+    left: 8px;
+    z-index: -1;
+}
+.red-pin { background: radial-gradient(circle at 30% 30%, #ff7b7b, #d90000); }
+.blue-pin { background: radial-gradient(circle at 30% 30%, #7bdeff, #0077d9); }
+
+/* Handwritten text */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+.handwritten {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: #222;
+    margin: 0;
+    line-height: 1.2;
+}
+.handwritten-small {
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    color: #555;
+    margin: 0;
+}
+
+/* Sticky Notes Results */
+.results-board {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 350px;
+}
+
+.placeholder-note {
+    background: #FFF9C4;
+    padding: 2rem;
+    box-shadow: 2px 5px 15px rgba(0,0,0,0.1);
+    transform: rotate(-2deg);
+    position: relative;
+    align-self: center;
+    margin-top: 2rem;
+}
+
+.sticky-note {
+    background: #FFF9C4;
+    padding: 1.5rem;
+    box-shadow: 2px 5px 15px rgba(0,0,0,0.1);
+    position: relative;
+    transition: transform 0.3s;
+}
+.sticky-note:nth-child(odd) { transform: rotate(1deg); background: #E1F5FE; }
+.sticky-note:nth-child(even) { transform: rotate(-1deg); background: #FCE4EC; }
+.sticky-note:hover { transform: scale(1.05); z-index: 10; }
+
+.result-card { background: transparent; border: none; box-shadow: none; padding: 0; }
+.result-title.authentic { color: #2E7D32; font-family: 'Caveat', cursive; font-size: 2rem; font-weight: bold; }
+.result-title.deepfake { color: #C62828; font-family: 'Caveat', cursive; font-size: 2rem; font-weight: bold; }
+
+.indicators h4 { font-family: 'Caveat', cursive; font-size: 1.5rem; color: #333; margin-bottom: 0.5rem; border-bottom: 2px solid rgba(0,0,0,0.1); display: inline-block; }
+.indicators-list li { border: none; padding: 0.2rem 0; font-family: 'Courier New', Courier, monospace; color: #444; }
+
+.disclaimer { background: transparent; border: 2px dashed #999; margin-top: 1rem; font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; padding: 0.5rem;}
+
 /* Responsive Design */
-@media (max-width: 1200px) {
+@media (max-width: 992px) {
     .hero-wrapper, .stats-wrapper {
         flex-direction: column;
         text-align: center;
